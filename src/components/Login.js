@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext"
@@ -17,7 +18,7 @@ export default function Login () {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true)
+        setLoading(true);
         try {
             await logIn(email, password)
             navigate("/")
@@ -25,7 +26,7 @@ export default function Login () {
             setError(true);
             setErrorMessage(e.message)
         }
-        setLoading(false)
+        setLoading(false);
     }
 
     const handlePasswordReset = async (e) => {
@@ -53,6 +54,6 @@ export default function Login () {
             <button className="submitBtn" type="submit" disabled={loading}>Sign in</button>
             {error ? <p className="errorMessage">{errorMessage}</p> : null}
         </form>
-        <p>Don't have an account? <Link>Sign up now</Link></p>
+        <p>Don't have an account? <Link to="/signup">Sign up now</Link></p>
     </>)
 }

@@ -25,7 +25,7 @@ export default function SignUp () {
     
         const navigate = useNavigate();
 
-        const { signUp, currentUser, signOutUser } = useAuth();
+        const { signUp, currentUser } = useAuth();
         const { uploadProfilePic } = useStorage();
         const { initiateUser } = useDB();
     
@@ -61,12 +61,11 @@ export default function SignUp () {
         };
     
         return (
-        <>
+        <div className="container">
             <p className="title">Lets Register Account</p>
-            {JSON.stringify(currentUser)}
             <p className="subtitle">Embark on your your fitness journey</p>
-            <form onSubmit={handleSubmit}>
-                    <section>
+            <form className="signup" onSubmit={handleSubmit}>
+                    <section className="profilePicArea">
                         <ProfilePic src={profilePicUrl} />
                         <input className="uploadProfilePicBtn" accept="image/*" type="file" onChange={handleProfilePicChange}></input>
                     </section>
@@ -74,15 +73,16 @@ export default function SignUp () {
                     <input id="email" type="email" value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}}></input>
                     <input required id="password" type="password" value={password} placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}></input>
                     <input required id="confirmPassword" type="password" value={passwordConfirm} placeholder="Confirm Password" onChange={(e)=>{setPasswordConfirm(e.target.value)}}></input>
-                    <input required id="bio" type="textarea" value={bio} placeholder="Bio" onChange={(e)=>{setBio(e.target.value)}}/>
+                    <textarea className="bioInput"  required id="bio" rows="4" value={bio} placeholder="Bio" onChange={(e)=>{setBio(e.target.value)}}/>
                 <button className="submitBtn" type="submit" disabled={loading}>Sign Up</button>
                 {error ? <p className="errorMessage">{errorMessage}</p> : null}
             </form>
-            <p>Already have an account? <Link to="/signup">Sign in now</Link></p>
-        </>)
+            <p className="redirect">Already have an account? <Link style={{color: "black", textDecoration: 'none'}} to="/login">Sign in now</Link></p>
+        </div>)
 }
 
 const ProfilePic = styled.img`
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%
 `

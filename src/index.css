@@ -1,0 +1,102 @@
+
+@font-face {
+    font-family: "alkatra";
+    src: url(./assets/Alkatra-VariableFont_wght.ttf);
+}
+
+#root {
+    font-family: "alkatra";
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+    align-self: flex-start;
+    font-family: "alkatra";
+}
+
+.subtitle {
+    font-size: 1rem;
+    align-self: flex-start;
+    padding-left: 0.5rem;
+    padding-bottom: 0.25rem;
+    font-family: "alkatra";
+}
+
+.profilePicArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.25rem 0
+}
+
+.profilePicArea > input {
+    color: white;
+    align-self: flex-start;
+}
+
+.login, .signup {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    gap: 0.75rem;
+}
+
+.login > input, .signup > input, textarea, .resetSection > input{
+    font-family: "alkatra";
+    color: black;
+    border: 1px solid black;
+    border-radius: 2.5%;
+    padding-left: 0.5rem;
+    font-size: 1.1rem;
+}
+
+
+.submitBtn { 
+    color: white;
+    background-color: black;
+    border:  none;
+    font-family: "alkatra";
+    border-radius: 5%;
+    font-size: 1.25rem;
+}
+
+.resetSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.resetSection > button {
+    background-color: white;
+    border: none;
+    align-self: flex-end;
+    font-family: "alkatra";
+}
+
+.submitBtn:active {
+    color: black;
+    background-color: white;
+    transition: ease-in-out;
+    border: 3px solid black
+}
+
+.errorMessage {
+    color: red;
+    text-align: center
+}
+
+.redirect {
+    padding-top: 0.5rem;
+    color: rgb(54, 54, 54);
+}
+

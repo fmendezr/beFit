@@ -41,19 +41,19 @@ export default function Login () {
     }
 
     return (
-    <>
+    <div className="container">
         <p className="title">Lets Sign you in</p>
         <p className="subtitle">Welcome back </p>
         <p className="subtitle">You have been missed</p>
-        <form onSubmit={handleSubmit}>
+        <form className="login" onSubmit={handleSubmit}>
                 <input id="email" type="email" value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}}></input>
-                <section>
+                <section className="resetSection">
                     <input required id="password" type="password" value={password} placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}></input>
-                    <button required className="passwordReset" type="button" onClick={handlePasswordReset}>Reset password?</button>
+                    <button id="resetPassword" className="passwordReset" type="button" onClick={handlePasswordReset}>Reset password?</button>
                 </section>
             <button className="submitBtn" type="submit" disabled={loading}>Sign in</button>
             {error ? <p className="errorMessage">{errorMessage}</p> : null}
         </form>
-        <p>Don't have an account? <Link to="/signup">Sign up now</Link></p>
-    </>)
+        <p className="redirect">Don't have an account? <Link style={{color: "black", textDecoration: 'none'}} to="/signup">Sign up now</Link></p>
+    </div>)
 }

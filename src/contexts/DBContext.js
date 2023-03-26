@@ -22,13 +22,19 @@ export function DBProvider({children}) {
             streak: 0,
             posts: [],
             followers: [],
-            following: []
+            following: [],
+            requests: [],
         })
+    }
 
+    const getUser = (uid) => {
+        const docRef = doc(db, "users", uid);
+        return getDoc(docRef)
     }
 
     const value = {
         initiateUser,
+        getUser
     }
 
     return(

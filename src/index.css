@@ -100,3 +100,73 @@
     color: rgb(54, 54, 54);
 }
 
+/*orineoi*/
+
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+
+#arrow {
+    align-self: flex-start;
+    height: 40px;
+    width: 40px;
+}
+
+.profileContainer > .username {
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+.profileImage{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+}
+
+.stats{
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 1rem;
+}
+
+ .stats > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ }
+
+.stats > div > p {
+    z-index: 1000;
+}
+
+.icon {
+    height: 50px;
+    width: 50px;
+    background-color: aliceblue;
+}
+
+.lined-subtitle {
+    display: flex;
+    width: 95vw;
+    align-items: center;
+}
+
+.short-line {
+    height: 0.3rem;
+    width: 12.5%;
+    margin-right: 2.5%;
+    background-color: black;
+}
+
+.line {
+    height: 0.3rem;
+    width: auto;
+    background-color: black;
+    margin-left: 2.5%;
+}

@@ -6,6 +6,7 @@ import { StorageProvider } from './contexts/StorageContext';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
+import UserProfile from './components/UserProfile';
 import './App.css';
 import PrivateRoute from "./PrivateRoute";
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
+          <Route path="/:displayName" element={<PrivateRoute><UserProfile/></PrivateRoute>}/>
         </Routes>
         </StorageProvider>
         </DBProvider>

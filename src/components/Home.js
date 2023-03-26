@@ -27,7 +27,7 @@ export default function Home () {
     <>
         <div className="navbar">
             <Link to="friends"><img className="mainIcon" src={friendsIcon}/></Link>
-            <img className="mainLogo" src={beFit}/>
+            <Link to="camera"><img className="mainLogo" src={beFit}/></Link>
             <Link to={`/${username}`}><img className="mainIcon" src={profile}/></Link>
         </div>    
     </>)

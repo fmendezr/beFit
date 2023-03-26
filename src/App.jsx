@@ -7,6 +7,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
 import UserProfile from './components/UserProfile';
+import Camera from './components/Camera';
 import './App.css';
 import PrivateRoute from "./PrivateRoute";
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
           <Route path="/:displayName" element={<PrivateRoute><UserProfile/></PrivateRoute>}/>
+          <Route path="/camera" element={<PrivateRoute><Camera/></PrivateRoute>} />
         </Routes>
         </StorageProvider>
         </DBProvider>

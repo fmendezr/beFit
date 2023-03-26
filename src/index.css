@@ -170,3 +170,20 @@
     background-color: black;
     margin-left: 2.5%;
 }
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    position: relative;
+}
+
+.mainIcon {
+    height: 5rem;
+}
+
+.mainLogo {
+    width: 50%;
+    position: relative;
+    left: 4%;
+}

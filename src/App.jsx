@@ -4,8 +4,10 @@ import { AuthProvider } from './contexts/AuthContext';
 import { DBProvider } from './contexts/DBContext';
 import { StorageProvider } from './contexts/StorageContext';
 import Login from './components/Login';
-import './App.css';
 import SignUp from './components/SignUp';
+import Home from './components/Home';
+import './App.css';
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
         </Routes>
         </StorageProvider>
         </DBProvider>

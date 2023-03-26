@@ -1,4 +1,6 @@
 import React, {useRef, useEffect, useState} from "react";
+import addPhoto from "../assets/addPhoto.svg"
+
 
 export default function Camera () {
     const videoRef = useRef(null);
@@ -31,6 +33,7 @@ export default function Camera () {
         let ctx = photo.getContext('2d');
         ctx.drawImage(video, 0, 0, width, height);
         setHasPhoto(true);
+        console.log(ctx)
     }
 
     const closePhoto = () => {
@@ -50,11 +53,13 @@ export default function Camera () {
         <div className="App">
             <div className="camera">
                 <video ref={videoRef}></video>
-                <button onClick={takePhoto}>SNAP!</button>
+                <button className="trigger" onClick={takePhoto}>SNAP!</button>
             </div>
-            <div className={'result ' + (hasPhoto ? 'hasPhoto': ' ')}>
+            <div className={'result ' + (hasPhoto ? 'hasPhoto'
+            : ' ')}>
                 <canvas ref={photoRef}></canvas>
                 <button onClick={closePhoto}>CLOSE</button>
+                <img className="addPostLogo" src={addPhoto}></img>
             </div>
         </div>
     );

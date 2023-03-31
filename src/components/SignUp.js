@@ -6,7 +6,7 @@ import { useStorage } from "../contexts/StorageContext";
 import { useDB } from "../contexts/DBContext";
 import { auth } from "../firebase";
 import defaultProfilePic from "../assets/defaultProfile.png";
-
+import { Card, Form, Button, Alert, CardImg } from "react-bootstrap";
 
 export default function SignUp () {
 
@@ -61,28 +61,40 @@ export default function SignUp () {
         };
     
         return (
-        <div className="container">
-            <p className="title">Lets Register Account</p>
-            <p className="subtitle">Embark on your your fitness journey</p>
-            <form className="signup" onSubmit={handleSubmit}>
-                    <section className="profilePicArea">
-                        <ProfilePic src={profilePicUrl} />
-                        <input className="uploadProfilePicBtn" accept="image/*" type="file" onChange={handleProfilePicChange}></input>
-                    </section>
-                    <input id="username" type="text" value={username} placeholder="Username" onChange={(e)=>{setUsername(e.target.value)}}></input>
-                    <input id="email" type="email" value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}}></input>
-                    <input required id="password" type="password" value={password} placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}></input>
-                    <input required id="confirmPassword" type="password" value={passwordConfirm} placeholder="Confirm Password" onChange={(e)=>{setPasswordConfirm(e.target.value)}}></input>
-                    <textarea className="bioInput"  required id="bio" rows="4" value={bio} placeholder="Bio" onChange={(e)=>{setBio(e.target.value)}}/>
-                <button className="submitBtn" type="submit" disabled={loading}>Sign Up</button>
-                {error ? <p className="errorMessage">{errorMessage}</p> : null}
-            </form>
-            <p className="redirect">Already have an account? <Link style={{color: "black", textDecoration: 'none'}} to="/login">Sign in now</Link></p>
+        <div className="w-100" style={{maxWidth: "400px"}}>
+            <Card className="mt-3">
+                <Card.Body >
+                    <h2 className="card-title">Lets Register Account</h2>
+                    <p className="subtitle">Embark on your your fitness journey</p>
+                    {error ? <Alert className="alert-danger">{errorMessage}</Alert> : null}
+                    <Form onSubmit={handleSubmit}>
+                            <Form.Group className="profilePicArea text-center mb-4">
+                                <Card.Img className="round mb-2" style={{borderRadius: "50%", height:"125px", width:"125px"}} src={profilePicUrl}/>
+                                <Form.Control className="uploadProfilePicBtn" accept="image/*" type="file" onChange={handleProfilePicChange}/>
+                            </Form.Group>
+                            <Form.Floating className="mb-4">
+                                <Form.Control id="username" type="text" value={username} placeholder="Username" onChange={(e)=>{setUsername(e.target.value)}}/>
+                                <Form.Label for="username">Username</Form.Label>
+                            </Form.Floating>
+                            <Form.Floating className="mb-4">
+                                <Form.Control id="email" type="email" value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}}/>
+                                <Form.Label for="email">Email</Form.Label>
+                            </Form.Floating>
+                            <Form.Floating className="mb-4">
+                                <Form.Control required id="password" type="password" value={password} placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}/>
+                                <Form.Label for="password">Password</Form.Label>
+                            </Form.Floating>
+                            <Form.Floating className="mb-4">
+                                <Form.Control required id="confirmPassword" type="password" value={passwordConfirm} placeholder="Confirm Password" onChange={(e)=>{setPasswordConfirm(e.target.value)}}/>
+                                <Form.Label for="confirmPassword">Confirm Password</Form.Label>
+                            </Form.Floating>
+                            <Form.Group className="mb-4">
+                            <Form.Control as="textarea" className="bioInput"  required id="bio" rows={4} value={bio} placeholder="Bio" onChange={(e)=>{setBio(e.target.value)}}/>
+                            </Form.Group>
+                        <Button className="w-100 text-center mt-2" variant="dark" type="submit" disabled={loading}>Sign Up</Button>
+                    </Form>  
+                </Card.Body>
+            </Card>
+            <div className="w-100 text-center mt-2">Already have an account? <Link style={{color: "black", textDecoration: 'none'}} to="/login">Sign in now</Link></div>
         </div>)
 }
-
-const ProfilePic = styled.img`
-    height: 100px;
-    width: 100px;
-    border-radius: 50%
-`

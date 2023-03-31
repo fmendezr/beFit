@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext"
+import { Card, Form, Button, Alert } from "react-bootstrap";
 
 export default function Login () {
 
@@ -41,19 +42,26 @@ export default function Login () {
     }
 
     return (
-    <div className="container">
-        <p className="title">Lets Sign you in</p>
-        <p className="subtitle">Welcome back </p>
-        <p className="subtitle">You have been missed</p>
-        <form className="login" onSubmit={handleSubmit}>
-                <input id="email" type="email" value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}}></input>
-                <section className="resetSection">
-                    <input required id="password" type="password" value={password} placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}></input>
-                    <button id="resetPassword" className="passwordReset" type="button" onClick={handlePasswordReset}>Reset password?</button>
-                </section>
-            <button className="submitBtn" type="submit" disabled={loading}>Sign in</button>
-            {error ? <p className="errorMessage">{errorMessage}</p> : null}
-        </form>
-        <p className="redirect">Don't have an account? <Link style={{color: "black", textDecoration: 'none'}} to="/signup">Sign up now</Link></p>
-    </div>)
+    <div className="w-100" style={{maxWidth: "400px"}}>
+    <Card>
+        <Card.Body>
+            <h2 className="card-title mb-2">Lets Sign you in</h2>
+            {error ? <Alert className="alert-danger">{errorMessage}</Alert> : null}
+            <Form onSubmit={handleSubmit}>
+                <Form.Floating className="mb-3">
+                    <Form.Control id="email" type="email" value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}} />
+                    <Form.Label for="email">Email</Form.Label>
+                </Form.Floating>
+                <Form.Floating className="mb-3">
+                    <Form.Control required id="password" type="password" value={password} placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}/>
+                    <Form.Label for="password">Password</Form.Label>
+                    <div id="resetPassword" className="form-text" type="button" onClick={handlePasswordReset}>Reset password?</div>
+                </Form.Floating>
+                <Button className="w-100 text-center mt-2 black btn-dark" type="submit" disabled={loading}>Sign in</Button>
+            </Form>
+        </Card.Body>
+    </Card>
+     <div className="w-100 text-center mt-2">Don't have an Account?<Link style={{color: "black", textDecoration: 'none'}} to="/signup"> Sign up now</Link></div>
+    </div>
+    ) 
 }

@@ -25,7 +25,7 @@ export default function SignUp () {
     
         const navigate = useNavigate();
 
-        const { signUp, currentUser } = useAuth();
+        const { signUp, updateDisplayName} = useAuth();
         const { uploadProfilePic } = useStorage();
         const { initiateUser } = useDB();
     
@@ -38,6 +38,8 @@ export default function SignUp () {
                         await signUp(email, password);
                         // insert user profile pic into cloud storage  (currentUser doesnt update on time)
                         await uploadProfilePic(auth.currentUser.uid, profilePic);
+                        // update display name in auth 
+                        updateDisplayName(username);
                         // insert user into db 
                         await initiateUser(auth.currentUser.uid, bio, email, username, `profileImages/${auth.currentUser.uid}`)
                     } catch(e){ 
@@ -61,6 +63,7 @@ export default function SignUp () {
         };
     
         return (
+            <div className="d-flex align-items-center justify-content-center" style={{minHeight:"100vh"}}>
         <div className="w-100" style={{maxWidth: "400px"}}>
             <Card className="mt-3">
                 <Card.Body >
@@ -96,5 +99,7 @@ export default function SignUp () {
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">Already have an account? <Link style={{color: "black", textDecoration: 'none'}} to="/login">Sign in now</Link></div>
-        </div>)
+        </div>
+        </div>
+        )
 }

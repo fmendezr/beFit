@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useDB } from "../contexts/DBContext";
-import friendsIcon from "../assets/friends.png";
-import beFit from "../assets/BeFit.png";
-import profile from "../assets/profile.png";
 import { useEffect, useState } from "react";
+import NavbarComponent from "./Navbar";
 
 export default function Home () {
 
@@ -24,11 +22,9 @@ export default function Home () {
     }, [])
 
     return (
-    <>
-        <div className="navbar">
-            <Link to="friends"><img className="mainIcon" src={friendsIcon}/></Link>
-            <Link to="camera"><img className="mainLogo" src={beFit}/></Link>
-            <Link to={`/${username}`}><img className="mainIcon" src={profile}/></Link>
-        </div>    
-    </>)
+    <div className="w-100 ">
+        <NavbarComponent/>
+        {username}
+
+    </div>)
 }

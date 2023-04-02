@@ -14,7 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
-    <Container className='d-flex align-items-center justify-content-center' style={{minHeight: "100vh"}}>
+
       <BrowserRouter>
         <AuthProvider>
         <DBProvider>
@@ -30,7 +30,6 @@ function App() {
         </DBProvider>
         </AuthProvider>
       </BrowserRouter>
-    </Container>
   );
 }
 

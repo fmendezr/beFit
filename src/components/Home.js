@@ -22,7 +22,7 @@ export default function Home () {
     }, [])
 
     return (
-    <div className="w-100 ">
+    <div className="w-100" style={{minHeight: 100}}>
         <NavbarComponent/>
         {username}
 

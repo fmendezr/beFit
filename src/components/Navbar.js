@@ -25,7 +25,7 @@ export default function NavbarComponent () {
                   <LinkContainer className="text-white" to="">
                         <Nav.Link >Friends</Nav.Link>
                   </LinkContainer>
-                  <LinkContainer className="text-white" to="">
+                  <LinkContainer className="text-white" to="/add-post">
                         <Nav.Link >Add Post</Nav.Link>
                   </LinkContainer>
                 </Nav>

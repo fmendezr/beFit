@@ -11,14 +11,11 @@ export function useStorage(){
 
 export function StorageProvider({children}) {
 
+    // upload 
+
     const uploadProfilePic = (userUID, image) => {
         const imgRef = ref(storage, `profileImages/${userUID}`); 
         return uploadBytes(imgRef, image);
-    }
-
-    const downloadProfilePic = (userUID) => {
-        const imgRef = ref(storage, `profileImages/${userUID}`);
-        return getDownloadURL(imgRef);
     }
 
     const uploadPostPic = (pid, image) => {
@@ -26,10 +23,23 @@ export function StorageProvider({children}) {
         return uploadBytes(imgRef, image)
     }
 
+    // download
+
+    const downloadProfilePic = (userUID) => {
+        const imgRef = ref(storage, `profileImages/${userUID}`);
+        return getDownloadURL(imgRef);
+    }
+
+    const downloadPostPic = (pid) => {
+        const imgRef = ref(storage, `postImages/${pid}`);
+        return getDownloadURL(imgRef);
+    }
+
     const value = {
         uploadProfilePic,
+        uploadPostPic,
         downloadProfilePic,
-        uploadPostPic
+        downloadPostPic
     }
 
     return(

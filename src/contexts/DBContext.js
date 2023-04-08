@@ -56,11 +56,17 @@ export function DBProvider({children}) {
         return getDoc(docRef)
     }
 
+    const getPostInfo = (pid) => {
+        const docRef = doc(db, "posts", pid);
+        return getDoc(docRef);
+    }
+
     const value = {
         initiateUser,
         addNewPostInfo,
         addNewPostToUser,
-        getUser
+        getUser,
+        getPostInfo
     }
 
     return(

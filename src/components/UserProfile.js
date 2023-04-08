@@ -4,6 +4,7 @@ import { useDB } from "../contexts/DBContext";
 import { useStorage } from "../contexts/StorageContext";
 import { useState, useEffect } from "react";
 import NavbarComponent from "./Navbar";
+import PostPreview from "./PostPreview";
 import defaultProfilePic from "../assets/defaultProfile.png";
 import badgesIcon from "../assets/badgesIcon.svg";
 import streakIcon from "../assets/streakIcon.svg";
@@ -15,6 +16,8 @@ export default function UserProfile () {
     const [streak, setStreak] = useState(0);
     const [badges, setBadges] = useState([]);
     const [bio, setBio] = useState("")
+
+    const [postIds, setPostIds] = useState([])
 
     const { currentUser } = useAuth();
     const { downloadProfilePic } = useStorage();
@@ -31,6 +34,7 @@ export default function UserProfile () {
                 setStreak(userData.streak);
                 setBadges(userData.badges);
                 setBio(userData.userBio);
+                setPostIds(userData.posts.reverse())
             }
         }
         updateStates();
@@ -76,6 +80,17 @@ export default function UserProfile () {
                             </Container>
                         </CarouselItem>
                     </Carousel>
+                </Container>
+                <Container className="mt-3 mb-3" style={{maxWidth: "950px"}}>
+                    <Row style={{display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center"}}>
+                        {postIds.map((post) => {
+                            return (
+                                <PostPreview 
+                                    postId={post}
+                                />
+                            )
+                        })}
+                    </Row>
                 </Container>
             </Container>
        </div>)

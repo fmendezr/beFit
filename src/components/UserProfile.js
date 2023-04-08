@@ -7,8 +7,6 @@ import NavbarComponent from "./Navbar";
 import defaultProfilePic from "../assets/defaultProfile.png";
 import badgesIcon from "../assets/badgesIcon.svg";
 import streakIcon from "../assets/streakIcon.svg";
-import returnIcon from "../assets/arrowback.svg";
-import { Link } from "react-router-dom";
 
 export default function UserProfile () {
 

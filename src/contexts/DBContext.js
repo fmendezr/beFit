@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { Timestamp, arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { useContext, createContext, useId } from "react";
 import  { db }  from "../firebase";
 
@@ -9,6 +9,8 @@ export function useDB(){
 }
 
 export function DBProvider({children}) {
+
+    // Creators
 
     const initiateUser = ( uid, userBio, userEmail, username, profilePicRef) => {
         const docRef = doc(db, "users", uid)
@@ -27,6 +29,28 @@ export function DBProvider({children}) {
         })
     }
 
+    const addNewPostToUser = (uid, pid) => {
+        const docRef = doc(db, "users", uid)
+        return updateDoc(docRef, {
+            posts: arrayUnion(pid)
+        })
+    }
+
+    const addNewPostInfo = (pid, uid, imageRef, positionX, positionY, caption) => {
+        const docRef = doc(db, "posts", pid)
+        return setDoc(docRef, {
+            user: uid,
+            imageRef, 
+            positionX,
+            positionY,
+            likes: [],
+            comments: [],
+            caption,
+        })
+    }
+
+    // Getters
+
     const getUser = (uid) => {
         const docRef = doc(db, "users", uid);
         return getDoc(docRef)
@@ -34,6 +58,8 @@ export function DBProvider({children}) {
 
     const value = {
         initiateUser,
+        addNewPostInfo,
+        addNewPostToUser,
         getUser
     }
 

@@ -1,9 +1,10 @@
-import { Image, Card, Form, FloatingLabel, Container, Button} from "react-bootstrap";
+import { Image, Card, Form, FloatingLabel, Container, Button, Alert} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useStorage } from "../contexts/StorageContext";
 import { useDB } from "../contexts/DBContext";
 import NavbarComponent from "./Navbar";
+import SuccesfullyPostedModal from "./SuccessfullyPostedModal";
 import defaultProfilePic from "../assets/defaultProfile.png";
 import addPhotoIcon from "../assets/addPhoto.svg";
 import likeIcon from "../assets/likeIcon.svg";
@@ -15,24 +16,26 @@ export default function AddPost () {
     const {currentUser} = useAuth();
     const {addNewPostInfo, addNewPostToUser} = useDB();
     const {downloadProfilePic, uploadPostPic} = useStorage();
-    const [profilePic, setProfilePic] = useState(defaultProfilePic) 
+    const [profilePic, setProfilePic] = useState(defaultProfilePic);
 
 
     const [picture, setPicture] = useState(null);
     const [pictureUrl, setPictureUrl] = useState(addPhotoIcon);
-    const [positionX, setPositionX] = useState(50)
-    const [positionY, setPositionY] = useState(50)
+    const [positionX, setPositionX] = useState(50);
+    const [positionY, setPositionY] = useState(50);
 
     const [caption, setCaption] = useState("")
 
-    const [hover, setHover] = useState(false)
+    const [hover, setHover] = useState(false);
     const hoverStyle = {
         color: hover ? "#0275d8" : "black" 
-    }
+    };
 
-    const [preview, setPreview] = useState(false)
+    const [preview, setPreview] = useState(false);
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false)
+    const [postedSuccesfully, setPostedSuccesfully] = useState(false)
 
     const handlePicChange = (e) => {
         setPictureUrl(URL.createObjectURL(e.target.files[0]));
@@ -47,9 +50,10 @@ export default function AddPost () {
             await uploadPostPic(pid, picture);
             await addNewPostToUser(currentUser.uid, pid);
             await addNewPostInfo(pid, currentUser.uid, `postImages/${pid}`, positionX, positionY, caption);
+            setPostedSuccesfully(true);
         }
         catch (error){
-            console.log(error)
+            setError(error)
         }
         setLoading(false)
     }
@@ -114,10 +118,12 @@ export default function AddPost () {
                     <p style={{fontSize: "10px"}}><span style={{fontWeight: "bold", fontSize: "12.5px"}}>{currentUser.displayName}</span>  {caption}</p>
                     </Container>
                 </Container>
+                {error != false ? <Alert className="alert-danger">{error}</Alert> : null}
                 <Button disabled={loading} type="button" className="text-center mt-2 black btn-dark" onClick={handleSubmit}>Post</Button>
             </Card.Body>
         </Card>
         }
+        <SuccesfullyPostedModal show={postedSuccesfully}/>
     </div>
     )
 } 

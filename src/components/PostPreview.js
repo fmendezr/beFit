@@ -44,6 +44,13 @@ export default function PostPreview ({postId, username,  profilePicUrl}) {
         getDownloadPostPic();
     },[]);
 
+    const addComment = (commentObj) => {
+        setComments((previousState) => {
+            const newCommentArr = previousState.unshift(commentObj)
+            return newCommentArr
+        })
+    }
+
     return (
         <>
             <Image src={imageUrl} style={{height: "250px", width: "250px", objectFit: "cover", objectPosition: `${positionX}% ${positionY}%`}} onClick={alternateShowModal} />
@@ -57,6 +64,7 @@ export default function PostPreview ({postId, username,  profilePicUrl}) {
                 x={positionX}
                 y={positionY}
                 comments={comments}
+                addComment={addComment}
                 likes={likes}
                 pid={postId} 
             />

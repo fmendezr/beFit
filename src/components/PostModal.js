@@ -1,12 +1,16 @@
 import { Modal, Button, Image, Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { v4 } from "uuid";
 import { useAuth } from "../contexts/AuthContext"
 import { useDB } from "../contexts/DBContext";
+import Comment from "./Comment";
 import likeIcon from "../assets/likeIcon.svg";
 import likedIcon from "../assets/likedIcon.svg";
-import commentIcon from "../assets/commentIcon.svg";
+import commentClosedIcon from "../assets/commentsClosedIcon.svg";
+import commentOpenedIcon from "../assets/commentsOpenedIcon.svg";
 import saveIcon from "../assets/saveIcon.svg";
 import savedIcon from "../assets/savedIcon.svg";
+
 
 
 export default function PostModal (props){
@@ -14,10 +18,11 @@ export default function PostModal (props){
     const { currentUser } = useAuth();
     const { getUser, likePost, unlikePost, savePost, unsavePost } = useDB();
 
-    let pid = props.pid
+    const pid = props.pid;
 
     const [liked, setLiked] = useState(false)
     const [saved, setSaved] = useState(false)
+    const [showComments, setShowComments] = useState(false);
 
     useEffect(()=>{
       const updateStatesAccurately = async () => {
@@ -73,6 +78,14 @@ export default function PostModal (props){
       }
     }
 
+    const openComments = () => {
+      setShowComments(true);
+    }
+
+    const closeComments = () => {
+      setShowComments(false);
+    }
+
     return (
         <Modal
           {...props}
@@ -89,15 +102,28 @@ export default function PostModal (props){
           <Modal.Body className="d-flex flex-column align-items-center">
             <Image src={props.imageUrl} className="imagePostModal" style={{objectFit: "cover", objectPosition: `${props.x}% ${props.y}%`}}/>
             <div className="buttonsContainerModal mt-2" style={{display: "flex", justifyContent: "space-between", alignItems: "flex-start"}}>
-                <div>
-                  {liked ? <Image src={likedIcon} onClick={unlike} style={{width: "35px"}}/> : <Image src={likeIcon} onClick={like} style={{width: "35px"}}/>}
-                  <Image src={commentIcon} style={{width: "35px"}}/>
-                </div>
-                {saved ? <Image src={savedIcon} onClick={unsave} style={{width: "35px"}}/> : <Image src={saveIcon} onClick={save} style={{width: "35px"}}/>}
+              <div>
+                {liked ? <Image src={likedIcon} onClick={unlike} style={{width: "35px"}}/> : <Image src={likeIcon} onClick={like} style={{width: "35px"}}/>}
+                {showComments ? <Image src={commentOpenedIcon} onClick={closeComments} style={{width: "35px"}} /> :<Image src={commentClosedIcon} onClick={openComments} style={{width: "35px"}}/>}
+              </div>
+              {saved ? <Image src={savedIcon} onClick={unsave} style={{width: "35px"}}/> : <Image src={saveIcon} onClick={save} style={{width: "35px"}}/>}
             </div>
-            <div  className="textPostModal" style={{fontFamily: "alkatra"}}>
-                <p><span style={{fontWeight: "bold", fontSize: "17.5px"}}>{props.username}</span>  {props.caption}</p>
+            <div className="textPostModal" style={{fontFamily: "alkatra"}}>
+              <p><span style={{fontWeight: "bold", fontSize: "17.5px"}}>{props.username}</span>  {props.caption}</p>
             </div>
+            {showComments ?
+            <div className="commentsPostModal pt-3" style={{fontFamily: "alkatra", borderTop: "2px solid black"}}>
+              {props.comments.map((comment) => {
+                return(
+                  <Comment 
+                    key={v4()}
+                    uid={comment.uid}
+                    contents={comment.contents}
+                  />
+                )
+              })}
+            </div> 
+            : null }
           </Modal.Body>
           <Modal.Footer>
             <Button variant="dark" onClick={props.onHide}>Close</Button>

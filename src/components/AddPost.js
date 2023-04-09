@@ -8,7 +8,7 @@ import SuccesfullyPostedModal from "./SuccessfullyPostedModal";
 import defaultProfilePic from "../assets/defaultProfile.png";
 import addPhotoIcon from "../assets/addPhoto.svg";
 import likeIcon from "../assets/likeIcon.svg";
-import commentIcon from "../assets/commentIcon.svg";
+import commentIcon from "../assets/commentsClosedIcon.svg";
 import { v4 } from "uuid";
 
 export default function AddPost () {

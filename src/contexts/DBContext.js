@@ -78,6 +78,13 @@ export function DBProvider({children}) {
         });
     }
 
+    const createComment = (pid, uid, content) => {
+        const docRef = doc(db, "posts", pid);
+        return updateDoc(docRef, {
+            comments: arrayUnion({"uid": uid, "contents": content})
+        });
+    }
+
     // Getters
 
     const getUser = (uid) => {
@@ -99,7 +106,8 @@ export function DBProvider({children}) {
         likePost,
         unlikePost,
         savePost,
-        unsavePost
+        unsavePost,
+        createComment
     }
 
     return(

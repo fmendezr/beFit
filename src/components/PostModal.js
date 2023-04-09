@@ -1,5 +1,5 @@
-import { Modal, Button, Image, Container } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { Modal, Button, Image, Container, Form, Alert } from "react-bootstrap";
+import { useEffect, useState, useRef } from "react";
 import { v4 } from "uuid";
 import { useAuth } from "../contexts/AuthContext"
 import { useDB } from "../contexts/DBContext";
@@ -10,19 +10,23 @@ import commentClosedIcon from "../assets/commentsClosedIcon.svg";
 import commentOpenedIcon from "../assets/commentsOpenedIcon.svg";
 import saveIcon from "../assets/saveIcon.svg";
 import savedIcon from "../assets/savedIcon.svg";
-
-
+import postCommentIcon from "../assets/postCommentIcon.svg"
+import postedCommentIcon from "../assets/postedCommentIcon.svg";
 
 export default function PostModal (props){
 
     const { currentUser } = useAuth();
-    const { getUser, likePost, unlikePost, savePost, unsavePost } = useDB();
+    const { getUser, likePost, unlikePost, savePost, unsavePost, createComment } = useDB();
 
     const pid = props.pid;
 
     const [liked, setLiked] = useState(false)
     const [saved, setSaved] = useState(false)
     const [showComments, setShowComments] = useState(false);
+
+    const [error, setError] = useState(false);
+    const [newComments, setNewComments] = useState([]);
+    const comment = useRef("");
 
     useEffect(()=>{
       const updateStatesAccurately = async () => {
@@ -86,6 +90,26 @@ export default function PostModal (props){
       setShowComments(false);
     }
 
+    const submitComment =  async (e) => {
+      e.preventDefault();
+      const commentContent = comment.current.value;
+      try {
+        await createComment(pid, currentUser.uid, commentContent);
+        const commentObj = {
+          "uid": currentUser.uid,
+          "contents": commentContent 
+        }
+        setNewComments((previouosState) => { 
+          const newArr = [commentObj].concat(previouosState);
+          return newArr;
+        })
+        setError(false)
+      } catch (e){
+        setError("An error was encountered, comment could not be uploaded.")
+        console.log(e)
+      }
+    }
+
     return (
         <Modal
           {...props}
@@ -112,7 +136,20 @@ export default function PostModal (props){
               <p><span style={{fontWeight: "bold", fontSize: "17.5px"}}>{props.username}</span>  {props.caption}</p>
             </div>
             {showComments ?
-            <div className="commentsPostModal pt-3" style={{fontFamily: "alkatra", borderTop: "2px solid black"}}>
+            <div className="commentsPostModal pt-3" style={{fontFamily: "alkatra", borderTop: "2px solid black", display: "flex", flexDirection: "column", gap:"15px"}}>
+              { error != false ?  <Alert className="alert-danger" style={{textAlign: "center", marginBottom: "-5px"}}>{error}</Alert> : null }
+              <div className="commentCreator" style={{display:"flex"}}>
+                <Form.Control placeholder="Comment..." ref={comment} /><Button bg="black" variant="dark"><Image src={postCommentIcon} className="whiteSVG" style={{height: "30px"}} onClick={submitComment}/></Button>
+              </div>
+              {newComments.map((comment) => {
+                return(
+                  <Comment 
+                    key={v4()}
+                    uid={comment.uid}
+                    contents={comment.contents}
+                  />
+                )
+              })}
               {props.comments.map((comment) => {
                 return(
                   <Comment 

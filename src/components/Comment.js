@@ -30,7 +30,7 @@ export default function Comment ({uid, contents}){
     return (
         <div style={{display: "flex", gap: "4px"}}>
             <Image src={profilePicUrl} roundedCircle style={{width: "30px", height:"30px"}} />
-            <p style={{fontSize: "15px"}}><span style={{fontWeight: "bold"}}>{username}</span>{contents}</p>
+            <p style={{fontSize: "15px"}}><span style={{fontWeight: "bold"}}>{username}</span>  {contents}</p>
         </div>
     )
 }

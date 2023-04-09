@@ -34,7 +34,8 @@ export default function PostPreview ({postId, username,  profilePicUrl}) {
             if (rawPostData.exists()){
                 const postInfo = rawPostData.data();
                 setCaption(postInfo.caption);
-                setComments(postInfo.comments);
+                let commentsArr = postInfo.comments.reverse() 
+                setComments(commentsArr);
                 setLikes(postInfo.likes);
                 setPositionX(postInfo.positionX);
                 setPositionY(postInfo.positionY);

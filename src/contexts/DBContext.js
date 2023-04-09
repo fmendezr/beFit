@@ -1,4 +1,4 @@
-import { Timestamp, arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { Timestamp, arrayRemove, arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { useContext, createContext, useId } from "react";
 import  { db }  from "../firebase";
 
@@ -10,10 +10,10 @@ export function useDB(){
 
 export function DBProvider({children}) {
 
-    // Creators
+    // Setters
 
     const initiateUser = ( uid, userBio, userEmail, username, profilePicRef) => {
-        const docRef = doc(db, "users", uid)
+        const docRef = doc(db, "users", uid);
         return setDoc(docRef, {
             username,
             userBio, 
@@ -23,21 +23,22 @@ export function DBProvider({children}) {
             badges: [],
             streak: 0,
             posts: [],
+            savedPosts: [],
             followers: [],
             following: [],
             requests: [],
-        })
+        });
     }
 
     const addNewPostToUser = (uid, pid) => {
-        const docRef = doc(db, "users", uid)
+        const docRef = doc(db, "users", uid);
         return updateDoc(docRef, {
             posts: arrayUnion(pid)
-        })
+        });
     }
 
     const addNewPostInfo = (pid, uid, imageRef, positionX, positionY, caption) => {
-        const docRef = doc(db, "posts", pid)
+        const docRef = doc(db, "posts", pid);
         return setDoc(docRef, {
             user: uid,
             imageRef, 
@@ -46,14 +47,42 @@ export function DBProvider({children}) {
             likes: [],
             comments: [],
             caption,
-        })
+        });
+    }
+
+    const likePost = (pid, uid) => {
+        const docRef = doc(db, "posts", pid);
+        return updateDoc(docRef, {
+            likes: arrayUnion(uid)
+        });
+    }
+
+    const unlikePost = (pid, uid) => {
+        const docRef = doc(db, "posts", pid);
+        return updateDoc(docRef, {
+            likes: arrayRemove(uid)
+        });
+    }
+
+    const savePost = (uid, pid) => {
+        const docRef = doc(db, "users", uid);
+        return updateDoc(docRef, {
+            savedPosts: arrayUnion(pid)
+        });
+    }
+
+    const unsavePost = (uid, pid) => {
+        const docRef = doc(db, "users", uid);
+        return updateDoc(docRef, {
+            savedPosts: arrayRemove(pid)
+        });
     }
 
     // Getters
 
     const getUser = (uid) => {
         const docRef = doc(db, "users", uid);
-        return getDoc(docRef)
+        return getDoc(docRef);
     }
 
     const getPostInfo = (pid) => {
@@ -66,7 +95,11 @@ export function DBProvider({children}) {
         addNewPostInfo,
         addNewPostToUser,
         getUser,
-        getPostInfo
+        getPostInfo,
+        likePost,
+        unlikePost,
+        savePost,
+        unsavePost
     }
 
     return(

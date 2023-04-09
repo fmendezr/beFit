@@ -86,7 +86,10 @@ export default function UserProfile () {
                         {postIds.map((post) => {
                             return (
                                 <PostPreview 
+                                    key={post}
                                     postId={post}
+                                    username={username}
+                                    profilePicUrl={profilePicUrl}
                                 />
                             )
                         })}

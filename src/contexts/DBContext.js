@@ -37,10 +37,11 @@ export function DBProvider({children}) {
         });
     }
 
-    const addNewPostInfo = (pid, uid, imageRef, positionX, positionY, caption) => {
+    const addNewPostInfo = (pid, uid, username, imageRef, positionX, positionY, caption) => {
         const docRef = doc(db, "posts", pid);
         return setDoc(docRef, {
             user: uid,
+            username,
             imageRef, 
             positionX,
             positionY,

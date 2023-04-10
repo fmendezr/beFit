@@ -49,7 +49,7 @@ export default function AddPost () {
         try {
             await uploadPostPic(pid, picture);
             await addNewPostToUser(currentUser.uid, pid);
-            await addNewPostInfo(pid, currentUser.uid, `postImages/${pid}`, positionX, positionY, caption);
+            await addNewPostInfo(pid, currentUser.uid, currentUser.displayName,`postImages/${pid}`, positionX, positionY, caption);
             setPostedSuccesfully(true);
         }
         catch (error){

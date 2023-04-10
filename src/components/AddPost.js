@@ -8,7 +8,11 @@ import SuccesfullyPostedModal from "./SuccessfullyPostedModal";
 import defaultProfilePic from "../assets/defaultProfile.png";
 import addPhotoIcon from "../assets/addPhoto.svg";
 import likeIcon from "../assets/likeIcon.svg";
-import commentIcon from "../assets/commentsClosedIcon.svg";
+import likedIcon from "../assets/likedIcon.svg";
+import commentClosedIcon from "../assets/commentsClosedIcon.svg";
+import commentOpenedIcon from "../assets/commentsOpenedIcon.svg";
+import saveIcon from "../assets/saveIcon.svg";
+import savedIcon from "../assets/savedIcon.svg";
 import { v4 } from "uuid";
 
 export default function AddPost () {
@@ -31,11 +35,15 @@ export default function AddPost () {
         color: hover ? "#0275d8" : "black" 
     };
 
-    const [preview, setPreview] = useState(false);
+    const [preview, setPreview] = useState(true);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false)
     const [postedSuccesfully, setPostedSuccesfully] = useState(false)
+
+    const [liked, setLiked] = useState(false);
+    const [commentsOpen, setCommentsOpen] = useState(false);
+    const [saved, setSaved] = useState(false);
 
     const handlePicChange = (e) => {
         setPictureUrl(URL.createObjectURL(e.target.files[0]));
@@ -110,9 +118,12 @@ export default function AddPost () {
                         <div style={{alignSelf: "center"}}>{currentUser.displayName}</div>
                     </Container>
                     <Image src={pictureUrl} className="previewImage" style={{width: "250px", height: "250px",  objectFit: "cover", objectPosition: `${positionX}% ${positionY}%`}}/>
-                    <Container as="div" className="d-flex mt-1">
-                        <Image src={likeIcon} style={{height: "30px"}}/>
-                        <Image src={commentIcon} style={{height: "30px"}}/>
+                    <Container as="div" className="d-flex mt-1 justify-content-between">
+                        <div style={{display: "flex"}}>
+                            {liked ? <Image src={likedIcon} style={{height: "30px"}} onClick={() => {setLiked(false)}}/> : <Image src={likeIcon} style={{height: "30px"}} onClick={() => {setLiked(true)}}/>}
+                            {commentsOpen ? <Image src={commentOpenedIcon} style={{height: "30px"}} onClick={() => {setCommentsOpen(false)}}/> : <Image src={commentClosedIcon} style={{height: "30px"}} onClick={() => {setCommentsOpen(true)}}/>}
+                        </div>
+                        {saved ? <Image src={savedIcon} style={{height:"30px"}} onClick={() => {setSaved(false)}}/> : <Image src={saveIcon} style={{height:"30px"}} onClick={() => {setSaved(true)}}/>}
                     </Container>
                     <Container>
                     <p style={{fontSize: "10px"}}><span style={{fontWeight: "bold", fontSize: "12.5px"}}>{currentUser.displayName}</span>  {caption}</p>

@@ -35,7 +35,7 @@ export default function AddPost () {
         color: hover ? "#0275d8" : "black" 
     };
 
-    const [preview, setPreview] = useState(true);
+    const [preview, setPreview] = useState(false);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false)

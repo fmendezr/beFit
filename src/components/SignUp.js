@@ -42,6 +42,7 @@ export default function SignUp () {
                         updateDisplayName(username);
                         // insert user into db 
                         await initiateUser(auth.currentUser.uid, bio, email, username, `profileImages/${auth.currentUser.uid}`)
+                        navigate("/")
                     } catch(e){ 
                         setError(true);
                         setErrorMessage(e.message)

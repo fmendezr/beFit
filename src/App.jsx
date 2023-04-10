@@ -3,13 +3,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { DBProvider } from './contexts/DBContext';
 import { StorageProvider } from './contexts/StorageContext';
-import { Container } from 'react-bootstrap';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
 import AddPost from './components/AddPost';
 import UserProfile from './components/UserProfile';
-import Camera from './components/Camera';
+import SavedPosts from './components/SavedPosts';
 import PrivateRoute from "./PrivateRoute";
 //import './App.css';
 
@@ -26,6 +25,7 @@ function App() {
           <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
           <Route path="/:displayName" element={<PrivateRoute><UserProfile/></PrivateRoute>}/>
           <Route path="/add-post" element={<PrivateRoute><AddPost/></PrivateRoute>} />
+          <Route path='/saved-posts' element={<PrivateRoute><SavedPosts/></PrivateRoute>} />
         </Routes>
         </StorageProvider>
         </DBProvider>

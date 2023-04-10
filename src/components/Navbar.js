@@ -28,6 +28,9 @@ export default function NavbarComponent () {
                   <LinkContainer className="text-white" to="/add-post">
                         <Nav.Link >Add Post</Nav.Link>
                   </LinkContainer>
+                  <LinkContainer className="text-white" to="/saved-posts">
+                    <Nav.Link>Saved Posts</Nav.Link>
+                  </LinkContainer>
                 </Nav>
               </Navbar.Collapse>
             </Container>

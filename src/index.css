@@ -103,6 +103,12 @@ input[type="range"]::-ms-thumb {
 
 }
 
+@media screen and (max-width: 520px){
+  .savedPostContainer {
+    justify-content: center;
+  }
+}
+
 .whiteSVG { 
   filter: invert(100%) sepia(68%) saturate(0%) hue-rotate(145deg) brightness(110%) contrast(101%);
 }

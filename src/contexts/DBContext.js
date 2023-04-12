@@ -24,6 +24,7 @@ export function DBProvider({children}) {
             streak: 0,
             posts: [],
             savedPosts: [],
+            friends: [],
             followers: [],
             following: [],
             requests: [],

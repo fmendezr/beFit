@@ -22,7 +22,7 @@ export default function NavbarComponent () {
                   <LinkContainer className="text-white" to={`/${currentUser.displayName}`}>
                         <Nav.Link >Profile</Nav.Link>
                   </LinkContainer>
-                  <LinkContainer className="text-white" to="">
+                  <LinkContainer className="text-white" to="/friends">
                         <Nav.Link >Friends</Nav.Link>
                   </LinkContainer>
                   <LinkContainer className="text-white" to="/add-post">

@@ -1,4 +1,4 @@
-import { Timestamp, arrayRemove, arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { Timestamp, arrayRemove, arrayUnion, doc, collection, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { useContext, createContext, useId } from "react";
 import  { db }  from "../firebase";
 
@@ -89,6 +89,10 @@ export function DBProvider({children}) {
 
     // Getters
 
+    const getAllUsers = () => {
+        return getDocs(collection(db, "users"))
+    }
+
     const getUser = (uid) => {
         const docRef = doc(db, "users", uid);
         return getDoc(docRef);
@@ -103,6 +107,7 @@ export function DBProvider({children}) {
         initiateUser,
         addNewPostInfo,
         addNewPostToUser,
+        getAllUsers,
         getUser,
         getPostInfo,
         likePost,

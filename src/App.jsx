@@ -25,7 +25,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
-          <Route path='/Friends' element={<PrivateRoute><Friends/></PrivateRoute>}/>
+          <Route path='/social' element={<PrivateRoute><Friends/></PrivateRoute>}/>
           <Route path="/:displayName" element={<PrivateRoute><UserProfile/></PrivateRoute>}/>
           <Route path="/users/:displayName" element={<PrivateRoute><OtherUserProfile/></PrivateRoute>}/>
           <Route path="/add-post" element={<PrivateRoute><AddPost/></PrivateRoute>} />

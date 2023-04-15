@@ -1,4 +1,4 @@
-import { Tabs, Tab, Container, Form } from "react-bootstrap";
+import { Tabs, Tab, Container, Form, Image } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useDB } from "../contexts/DBContext";
@@ -78,6 +78,14 @@ export default function Friends () {
             <Tab eventKey="Search" title="Search">
                 <Container as="div" className="w-80"> 
                     <Form.Control type="text" placeholder="Search..." onChange={handleAllUsersFilter} className="mb-3"></Form.Control> 
+                    {filteredAllUsers.length == 0 ? 
+                    <Container className="w-100" style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                        <Image src={notFoundIcon} style={{height: "155px", width: "155px"}} />
+                        <h2>No Users Found</h2>
+                    </Container> 
+                    :
+                        null
+                    }
                     {filteredAllUsers.map((user) => {
                         return (
                             <UserPreviewSearch
@@ -90,7 +98,15 @@ export default function Friends () {
             </Tab>
             <Tab eventKey="Followers" title="Followers">
                 <Container as="div" className="w-80">
-                    <Form.Control type="text" placeholder="Search..." onChange={handleFollowersFiltered} className="mb-3"></Form.Control> 
+                    <Form.Control type="text" placeholder="Search..." onChange={handleFollowersFiltered} className="mb-3"></Form.Control>
+                    {filteredFollowers.length == 0 ? 
+                    <Container className="w-100" style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                        <Image src={notFoundIcon} style={{height: "155px", width: "155px"}} />
+                        <h2>No Users Found</h2>
+                    </Container> 
+                    :
+                        null
+                    } 
                     {filteredFollowers.map((user) => {
                         return (
                             <UserPreviewFollowers 
@@ -105,6 +121,14 @@ export default function Friends () {
             <Tab eventKey="Following" title="Following">
                 <Container as="div" className="w-80">
                     <Form.Control type="text" placeholder="Search..." onChange={handleFollowingFiltered} className="mb-3"></Form.Control> 
+                    {filteredFollowing.length == 0 ? 
+                    <Container className="w-100" style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                        <Image src={notFoundIcon} style={{height: "155px", width: "155px"}} />
+                        <h2>No Users Found</h2>
+                    </Container> 
+                    :
+                        null
+                    } 
                     {filteredFollowing.map((user) => {
                         return (
                             <UserPreviewFollowing 

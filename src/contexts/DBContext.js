@@ -77,6 +77,7 @@ export function DBProvider({children}) {
             likes: [],
             comments: [],
             caption,
+            postedOn: Timestamp.fromDate(new Date())
         });
     }
 

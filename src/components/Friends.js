@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useDB } from "../contexts/DBContext";
 import NavbarComponent from "./Navbar";
 import UserPreviewSearch from "./UserPreviewSearch";
+import UserPreviewFollowing from "./UserPreviewFollowing";
 
 export default function Friends () {
 
@@ -57,7 +58,7 @@ export default function Friends () {
             fill
         >
             <Tab eventKey="Search" title="Search">
-                <Container as="div" className="w-80" style={{gap: "5px"}}>  
+                <Container as="div" className="w-80">  
                     {allUsers.map((user) => {
                         return (
                             <UserPreviewSearch
@@ -74,13 +75,16 @@ export default function Friends () {
                </Container>
             </Tab>
             <Tab eventKey="Following" title="Following">
-                <Container as="div" className="w-80" style={{height: "100px", background: "red"}}>
-
-                </Container>
-            </Tab>
-            <Tab eventKey="requests" title="Requests">
-                <Container as="div" className="w-80" bg="black" style={{height: "100px", background: "salmon"}}>
-
+                <Container as="div" className="w-80">
+                    {following.map((user) => {
+                        return (
+                            <UserPreviewFollowing 
+                                key={user.uid}
+                                user={user}
+                                cuser={currentUser}
+                            />
+                        )
+                    })}
                 </Container>
             </Tab>
         </Tabs>

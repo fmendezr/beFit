@@ -31,6 +31,34 @@ export function DBProvider({children}) {
         });
     }
 
+    const setFollowing = (uidFollowing, uidFollowed) => {
+        const docRef = doc(db, "users", uidFollowing);
+        return updateDoc(docRef, {
+            following: arrayUnion(uidFollowed)
+        })
+    }
+
+    const setFollowed = (uidFollowed, uidFollowing) => {
+        const docRef = doc(db, "users", uidFollowed);
+        return updateDoc(docRef, {
+            followers: arrayUnion(uidFollowing)
+        })
+    }
+    
+    const setUnfollowing = (uidFollowing, uidFollowed) => {
+        const docRef = doc(db, "users", uidFollowing);
+        return updateDoc(docRef, {
+            following: arrayRemove(uidFollowed)
+        })
+    }
+
+    const setUnfollowed = (uidFollowed, uidFollowing) => {
+        const docRef = doc(db, "users", uidFollowed);
+        return updateDoc(docRef, {
+            followers: arrayRemove(uidFollowing)
+        })
+    }
+
     const addNewPostToUser = (uid, pid) => {
         const docRef = doc(db, "users", uid);
         return updateDoc(docRef, {
@@ -105,6 +133,10 @@ export function DBProvider({children}) {
 
     const value = {
         initiateUser,
+        setFollowing,
+        setFollowed,
+        setUnfollowing,
+        setUnfollowed,
         addNewPostInfo,
         addNewPostToUser,
         getAllUsers,

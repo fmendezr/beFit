@@ -38,6 +38,7 @@ export default function Friends () {
                     allOtherUserObj.push(userObj);
                 }
             });
+           
             // set the states
             setFollowing(allOtherUserObj.filter((user) => currentUserObj.following.includes(user.uid)));
             setFollowers(allOtherUserObj.filter((user) => currentUserObj.followers.includes(user.uid)));
@@ -56,7 +57,7 @@ export default function Friends () {
             fill
         >
             <Tab eventKey="Search" title="Search">
-                <Container as="div" className="w-80" style={{}}>  
+                <Container as="div" className="w-80" style={{gap: "5px"}}>  
                     {allUsers.map((user) => {
                         return (
                             <UserPreviewSearch

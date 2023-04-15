@@ -8,6 +8,7 @@ import SignUp from './components/SignUp';
 import Home from './components/Home';
 import AddPost from './components/AddPost';
 import UserProfile from './components/UserProfile';
+import OtherUserProfile from "./components/OtherUserProfile";
 import SavedPosts from './components/SavedPosts';
 import Friends from './components/Friends';
 import PrivateRoute from "./PrivateRoute";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
           <Route path='/Friends' element={<PrivateRoute><Friends/></PrivateRoute>}/>
           <Route path="/:displayName" element={<PrivateRoute><UserProfile/></PrivateRoute>}/>
+          <Route path="/users/:displayName" element={<PrivateRoute><OtherUserProfile/></PrivateRoute>}/>
           <Route path="/add-post" element={<PrivateRoute><AddPost/></PrivateRoute>} />
           <Route path='/saved-posts' element={<PrivateRoute><SavedPosts/></PrivateRoute>} />
         </Routes>

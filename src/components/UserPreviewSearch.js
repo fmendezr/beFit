@@ -20,7 +20,7 @@ export default function UserPreviewSearch ({user}) {
 
     return (
         <div>
-            <Link style={{color:"black", textDecoration: "none"}}>
+            <Link to={`/users/${user.username}`} state={{uid: user.uid}} style={{color:"black", textDecoration: "none"}}>
                 <Container style={{ display: "flex", alignItems: "center", gap: "3px" }}>
                     <Image src={profilePicUrl} roundedCircle style={{height: "40px", width: "40px"}}/>
                     {user.username}

@@ -1,8 +1,9 @@
 import { Tabs, Tab, Container } from "react-bootstrap";
-import NavbarComponent from "./Navbar";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useDB } from "../contexts/DBContext";
+import NavbarComponent from "./Navbar";
+import UserPreviewSearch from "./UserPreviewSearch";
 
 export default function Friends () {
 
@@ -55,7 +56,15 @@ export default function Friends () {
             fill
         >
             <Tab eventKey="Search" title="Search">
-                <Container as="div" className="w-80" style={{height: "100px", background: "black"}}>
+                <Container as="div" className="w-80" style={{}}>  
+                    {allUsers.map((user) => {
+                        return (
+                            <UserPreviewSearch
+                                key={user.uid}
+                                user={user}
+                            />
+                        )
+                    })}                  
                 </Container>
             </Tab>
             <Tab eventKey="Followers" title="Followers">

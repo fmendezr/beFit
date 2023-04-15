@@ -44,6 +44,7 @@ export default function PostModal (props){
           }
         }
       };
+      updateStatesAccurately();
     },[])
 
     const like = async () => {

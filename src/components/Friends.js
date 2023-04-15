@@ -5,6 +5,7 @@ import { useDB } from "../contexts/DBContext";
 import NavbarComponent from "./Navbar";
 import UserPreviewSearch from "./UserPreviewSearch";
 import UserPreviewFollowing from "./UserPreviewFollowing";
+import UserPreviewFollowers from "./UserPreviewFollowers";
 
 export default function Friends () {
 
@@ -70,9 +71,17 @@ export default function Friends () {
                 </Container>
             </Tab>
             <Tab eventKey="Followers" title="Followers">
-               <Container as="div" className="w-80" style={{height: "100px", background: "blue"}}>
-
-               </Container>
+                <Container as="div" className="w-80">
+                    {followers.map((user) => {
+                        return (
+                            <UserPreviewFollowers 
+                                key={user.uid}
+                                user={user}
+                                cuser={currentUser}
+                            />
+                        )
+                    })}
+                </Container>
             </Tab>
             <Tab eventKey="Following" title="Following">
                 <Container as="div" className="w-80">

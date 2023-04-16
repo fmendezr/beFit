@@ -9,6 +9,7 @@ import defaultProfilePic from "../assets/defaultProfile.png";
 import badgesIcon from "../assets/badgesIcon.svg";
 import followingIcon from "../assets/followingIcon.svg";
 import followersIcon from "../assets/followersIcon.svg";
+import { Link } from "react-router-dom";
 
 export default function UserProfile () {
 
@@ -58,12 +59,16 @@ export default function UserProfile () {
                     </Row>
                     <Row as="div" className="mt-2">
                         <Col className="d-flex justify-content-center align-items-center">
-                            <Image src={followersIcon}/>
-                            <h3>{followers.length}</h3>
+                            <Link to="/social" className="d-flex justify-content-center align-items-center" state={{key: "Followers"}} style={{color: "black", textDecoration: "none"}}>
+                                <Image src={followersIcon}/>
+                                <h3>{followers.length}</h3>
+                            </Link>
                         </Col>
                         <Col className="d-flex justify-content-center align-items-center">
+                            <Link to="/social" className="d-flex justify-content-center align-items-center" state={{key: "Following"}} style={{color: "black", textDecoration: "none"}}>
                             <h3>{following.length}</h3>
                             <Image src={followingIcon}/>
+                            </Link>
                         </Col>
                     </Row>
                     <Row as="div" className="mt-3">

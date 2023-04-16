@@ -7,6 +7,7 @@ import UserPreviewSearch from "./UserPreviewSearch";
 import UserPreviewFollowing from "./UserPreviewFollowing";
 import UserPreviewFollowers from "./UserPreviewFollowers";
 import notFoundIcon from "../assets/notFoundIcon.svg";
+import { useLocation } from "react-router-dom";
 
 export default function Friends () {
 
@@ -20,6 +21,15 @@ export default function Friends () {
     const [following, setFollowing] = useState([]);
     const [filteredFollowing, setFilteredFollowing] = useState([]);
     const [requests, setRequests] = useState([]);
+
+    let defaultKey = "Search"
+    const location = useLocation();
+    try {
+        let x = location.state.key
+        defaultKey = x;
+    } catch {
+        
+    }
 
     const handleAllUsersFilter = (e) => {
         const parameter = e.target.value;
@@ -70,7 +80,7 @@ export default function Friends () {
     <div className="w-100" style={{minHeight: "100vh"}}>
         <NavbarComponent />
         <Tabs
-            defaultActiveKey="Search"
+            defaultActiveKey={defaultKey}
             id="fill-tab-example"
             className="mb-3 mt-3"
             fill

@@ -7,6 +7,7 @@ import { useStorage } from "../contexts/StorageContext";
 import NavbarComponent from "./Navbar";
 import PostPreview from "./PostPreview";
 import FollowerModals from "./FollowersModal";
+import FollowingModal from "./FollowingModal";
 import defaultProfilePic from "../assets/defaultProfile.png";
 import badgesIcon from "../assets/badgesIcon.svg";
 import followingIcon from "../assets/followingIcon.svg";
@@ -27,6 +28,7 @@ export default function OtherUserProfile () {
     const [disabledFollowButton, setDisabledFollowButton] = useState(false);
     
     const [showFollowersModal, setShowFollowersModal] = useState(false);
+    const [showFollowingModal, setShowFollowingModal] = useState(false);
 
     const [postIds, setPostIds] = useState([]);
 
@@ -115,7 +117,7 @@ export default function OtherUserProfile () {
                             <Image src={followersIcon}/>
                             <h3>{followers.length}</h3>
                         </Col>
-                        <Col className="d-flex justify-content-center align-items-center">
+                        <Col className="d-flex justify-content-center align-items-center" onClick={() => {setShowFollowingModal(true)}}>
                             <h3>{following.length}</h3>
                             <Image src={followingIcon}/>
                         </Col>
@@ -129,6 +131,15 @@ export default function OtherUserProfile () {
                         show={true}
                         onHide={() => {setShowFollowersModal(false)}}
                         followersArr={followers}
+                    />
+                    : null
+                    }
+                    { showFollowingModal ?
+                    <FollowingModal 
+                        user={userInfo.uid}
+                        show={true}
+                        onHide={() => {setShowFollowingModal(false)}}
+                        followingArr={following}
                     />
                     : null
                     }

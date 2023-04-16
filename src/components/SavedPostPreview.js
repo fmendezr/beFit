@@ -5,6 +5,7 @@ import { useDB } from "../contexts/DBContext";
 import PostModal from "./PostModal";
 import loadingGif from "../assets/loadingIcon.gif";
 import defaultProfilePic from "../assets/defaultProfile.png";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 
 export default function SavedPostPreview ({postId}) {
@@ -77,6 +78,7 @@ export default function SavedPostPreview ({postId}) {
                 addComment={addComment}
                 likes={likes}
                 pid={postId} 
+                uid={uid}
             />
         </>
     )

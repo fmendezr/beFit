@@ -11,7 +11,7 @@ import commentOpenedIcon from "../assets/commentsOpenedIcon.svg";
 import saveIcon from "../assets/saveIcon.svg";
 import savedIcon from "../assets/savedIcon.svg";
 import postCommentIcon from "../assets/postCommentIcon.svg"
-import postedCommentIcon from "../assets/postedCommentIcon.svg";
+import { Link } from "react-router-dom";
 
 export default function PostModal (props){
 
@@ -120,8 +120,10 @@ export default function PostModal (props){
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter" style={{fontFamily: "alkatra"}}>
-              <Image roundedCircle src={props.profilePicUrl} style={{width: "40px"}}/>
-              {props.username}
+              <Link to={props.uid === currentUser.uid ? `/${currentUser.displayName}` : `/users/${props.username}`} state={{uid: props.uid}} style={{color: "black", textDecoration: "none"}}>
+                <Image roundedCircle src={props.profilePicUrl} style={{width: "40px"}}/>
+                {props.username}
+              </Link>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="d-flex flex-column align-items-center">

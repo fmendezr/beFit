@@ -18,6 +18,8 @@ export default function PostPreview ({postId, username,  profilePicUrl}) {
     const [positionX, setPositionX] = useState("0");
     const [positionY, setPositionY] = useState("0");
 
+    const [uid, setUid] = useState("");
+
     const [showModal, setShowModal] = useState(false); 
 
     const alternateShowModal = () => {
@@ -68,6 +70,7 @@ export default function PostPreview ({postId, username,  profilePicUrl}) {
                 addComment={addComment}
                 likes={likes}
                 pid={postId} 
+                uid={uid}
             />
         </>
     )

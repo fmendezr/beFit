@@ -6,10 +6,11 @@ import { useDB } from "../contexts/DBContext";
 import { useStorage } from "../contexts/StorageContext";
 import NavbarComponent from "./Navbar";
 import PostPreview from "./PostPreview";
+import FollowerModals from "./FollowersModal";
 import defaultProfilePic from "../assets/defaultProfile.png";
 import badgesIcon from "../assets/badgesIcon.svg";
-import streakIcon from "../assets/streakIcon.svg";
-import { OAuthCredential } from "firebase/auth";
+import followingIcon from "../assets/followingIcon.svg";
+import followersIcon from "../assets/followersIcon.svg";
 
 export default function OtherUserProfile () {
 
@@ -24,10 +25,12 @@ export default function OtherUserProfile () {
     const [following, setFollowings] = useState([]);
     const [inFollowers, setInFollowers] = useState(false);
     const [disabledFollowButton, setDisabledFollowButton] = useState(false);
+    
+    const [showFollowersModal, setShowFollowersModal] = useState(false);
 
-    const [postIds, setPostIds] = useState([])
+    const [postIds, setPostIds] = useState([]);
 
-    const { downloadProfilePic } = useStorage();
+    const { downloadProfilePic } = useStorage();    
     const { getUser, setFollowing, setFollowed, setUnfollowing,setUnfollowed, } = useDB();
 
     const location = useLocation();
@@ -108,18 +111,27 @@ export default function OtherUserProfile () {
                         <Image roundedCircle src={profilePicUrl} style={{height: "200px", width: "225px"}}/>
                     </Row>
                     <Row as="div" className="mt-2">
-                        <Col className="d-flex justify-content-center align-items-center">
-                            <Image src={badgesIcon}/>
+                        <Col className="d-flex justify-content-center align-items-center" onClick={() => {setShowFollowersModal(true)}}>
+                            <Image src={followersIcon}/>
                             <h3>{followers.length}</h3>
                         </Col>
                         <Col className="d-flex justify-content-center align-items-center">
                             <h3>{following.length}</h3>
-                            <Image src={streakIcon}/>
+                            <Image src={followingIcon}/>
                         </Col>
                     </Row>
                     <Row as="div" className="mt-3">
                         <p style={{textAlign: "center"}}>{bio}</p>
                     </Row>
+                    { showFollowersModal ? 
+                    <FollowerModals 
+                        user={userInfo.uid}
+                        show={true}
+                        onHide={() => {setShowFollowersModal(false)}}
+                        followersArr={followers}
+                    />
+                    : null
+                    }
                     <Carousel variant="dark" className="mb-3">
                         <CarouselItem className="">
                             <Container className="w-100 d-flex justify-content-center" style={{height: "85px"}}>

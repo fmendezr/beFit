@@ -6,7 +6,7 @@ import { useDB } from "../contexts/DBContext";
 import { useAuth } from "../contexts/AuthContext";
 import loadingGif from "../assets/loadingIcon.gif"
 
-export default function UserPreviewFollowers ({user, cuser}) {
+export default function UserPreviewFollowers ({user, cuser, admin=true}) {
 
     const {downloadProfilePic} = useStorage();
     const {setUnfollowing, setUnfollowed} = useDB();
@@ -46,7 +46,12 @@ export default function UserPreviewFollowers ({user, cuser}) {
                     <Image src={profilePicUrl} roundedCircle style={{height: "40px", width: "40px"}}/>
                     {user.username}
                 </Container>
-                <Button variant={followed ? "dark" : "primary"} disabled={loading} onClick={handleClick} style={{ width: "88px"}}>{followed ? "remove" : "removed" }</Button>  
+                {admin 
+                ?
+                    <Button variant={followed ? "dark" : "primary"} disabled={loading} onClick={handleClick} style={{ width: "88px"}}>{followed ? "remove" : "removed" }</Button>  
+                :
+                    <Button disabled={loading} onClick={handleClick} style={{ width: "0px", background: "white", borderColor: "white"}}></Button>  
+                }
             </Link>
         </div>
     )

@@ -7,7 +7,8 @@ import NavbarComponent from "./Navbar";
 import PostPreview from "./PostPreview";
 import defaultProfilePic from "../assets/defaultProfile.png";
 import badgesIcon from "../assets/badgesIcon.svg";
-import streakIcon from "../assets/streakIcon.svg";
+import followingIcon from "../assets/followingIcon.svg";
+import followersIcon from "../assets/followersIcon.svg";
 
 export default function UserProfile () {
 
@@ -15,6 +16,8 @@ export default function UserProfile () {
     const [username, setUsername] = useState("");
     const [streak, setStreak] = useState(0);
     const [badges, setBadges] = useState([]);
+    const [followers, setFollowers] = useState([]); 
+    const [following, setFollowing] = useState([]);
     const [bio, setBio] = useState("")
 
     const [postIds, setPostIds] = useState([])
@@ -34,7 +37,9 @@ export default function UserProfile () {
                 setStreak(userData.streak);
                 setBadges(userData.badges);
                 setBio(userData.userBio);
-                setPostIds(userData.posts.reverse())
+                setPostIds(userData.posts.reverse());
+                setFollowers(userData.followers);
+                setFollowing(userData.following);
             }
         }
         updateStates();
@@ -53,12 +58,12 @@ export default function UserProfile () {
                     </Row>
                     <Row as="div" className="mt-2">
                         <Col className="d-flex justify-content-center align-items-center">
-                            <Image src={badgesIcon}/>
-                            <h3>{badges.length}</h3>
+                            <Image src={followersIcon}/>
+                            <h3>{followers.length}</h3>
                         </Col>
                         <Col className="d-flex justify-content-center align-items-center">
-                            <h3>{streak}</h3>
-                            <Image src={streakIcon}/>
+                            <h3>{following.length}</h3>
+                            <Image src={followingIcon}/>
                         </Col>
                     </Row>
                     <Row as="div" className="mt-3">

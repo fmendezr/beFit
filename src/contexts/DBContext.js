@@ -119,12 +119,16 @@ export function DBProvider({children}) {
     // Getters
 
     const getAllUsers = () => {
-        return getDocs(collection(db, "users"))
+        return getDocs(collection(db, "users"));
     }
 
     const getUser = (uid) => {
         const docRef = doc(db, "users", uid);
         return getDoc(docRef);
+    }
+
+    const getAllPostsInfo = () => {
+        return getDocs(collection(db, "posts"));
     }
 
     const getPostInfo = (pid) => {
@@ -142,6 +146,7 @@ export function DBProvider({children}) {
         addNewPostToUser,
         getAllUsers,
         getUser,
+        getAllPostsInfo,
         getPostInfo,
         likePost,
         unlikePost,

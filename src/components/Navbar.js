@@ -4,12 +4,12 @@ import { LinkContainer } from "react-router-bootstrap";
 import {useAuth} from "../contexts/AuthContext"
 
 
-export default function NavbarComponent () {
+export default function NavbarComponent ({sticky = false}) {
 
     const { currentUser} = useAuth();
 
     return (
-        <Navbar bg="black" variant="dark" expand="lg">
+        <Navbar bg="black" variant="dark" expand="lg" sticky={sticky ? "top" : null}>
             <Container>
               <Navbar.Brand>
                 <LinkContainer to="/" style={{height: "50px"}}>

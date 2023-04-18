@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 export default function Friends () {
 
     const {currentUser} = useAuth();
-    const {getAllUsers, getUser} = useDB(); 
+    const {getAllUsers,} = useDB(); 
 
     const [allUsers, setAllUsers] = useState([]);
     const [filteredAllUsers, setFilteredAllUsers] = useState([]);
@@ -78,7 +78,7 @@ export default function Friends () {
 
     return (
     <div className="w-100" style={{minHeight: "100vh"}}>
-        <NavbarComponent />
+        <NavbarComponent sticky={true}/>
         <Tabs
             defaultActiveKey={defaultKey}
             id="fill-tab-example"

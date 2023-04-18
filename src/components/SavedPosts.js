@@ -27,7 +27,7 @@ export default function SavedPosts () {
 
     return (
         <div className="w-100" style={{minHeight: "100vh"}}>
-            <NavbarComponent/>
+            <NavbarComponent sticky={true}/>
             <Container as="div" className="mt-4">
                 <Row as="div">
                     <h2 stly>Saved Posts</h2>

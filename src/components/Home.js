@@ -68,6 +68,6 @@ export default function Home () {
                 key={index}
             />
         })}
-        {postsInFeed < followingPosts.length ? <Button style={{alignSelf: "center", marginBottom: "15px"}} variant="dark" onClick={loadMorePosts}>Load More Post</Button> : <p style={{alignSelf: "center", color: "#0275d8", marginBottom: "10px"}}> End of Posts of Accounts u Follow</p>}
+        {postsInFeed < followingPosts.length ? <Button style={{alignSelf: "center", marginBottom: "15px"}} variant="dark" onClick={loadMorePosts}>Load More Post</Button> : <p style={{alignSelf: "center", color: "#0275d8", marginTop: "5px" ,marginBottom: "10px"}}> End of Posts of Accounts u Follow</p>}
     </div>)
 }

@@ -127,7 +127,7 @@ export default function OtherUserProfile () {
                     </Row>
                     { showFollowersModal ? 
                     <FollowerModals 
-                        user={userInfo.uid}
+                        user={userInfo}
                         show={true}
                         onHide={() => {setShowFollowersModal(false)}}
                         followersArr={followers}
@@ -136,7 +136,7 @@ export default function OtherUserProfile () {
                     }
                     { showFollowingModal ?
                     <FollowingModal 
-                        user={userInfo.uid}
+                        user={userInfo}
                         show={true}
                         onHide={() => {setShowFollowingModal(false)}}
                         followingArr={following}

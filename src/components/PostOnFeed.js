@@ -108,7 +108,7 @@ export default function PostOnFeed ({postObj, cuserProfilePic, cuser}) {
     return (
         <div className="postFeedContainer mt-3" style={{maxWidth: "650px", display: "flex", flexDirection: "column", alignItems: "center", alignSelf: "center"}}> 
             <div as="div" className="postFeedHeader mb-1" style={{width: "100%", display: "flex", alignItems: "center", gap: "5px"}}>
-                <Link to={postObj.user === cuser.uid ? `/${cuser.displayName}` : `/users/${postObj.user}`} state={{uid: postObj.user}} style={{color: "black", textDecoration: "none"}}>
+                <Link to={postObj.user === cuser.uid ? `/${cuser.displayName}` : `/users/${postObj.username}`} state={{uid: postObj.user}} style={{color: "black", textDecoration: "none"}}>
                     <Image roundedCircle src={userProfilePic} style={{width: "40px"}}/>
                     {postObj.username}
                 </Link>

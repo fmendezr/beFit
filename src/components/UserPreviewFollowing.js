@@ -50,7 +50,7 @@ export default function UserPreviewFollowing ({user, cuser}) {
 
     return (
         <div style={{paddingBottom: "10px" ,marginBottom: "10px", borderBottom: "2px solid black"}}>
-            <Link to={`/users/${user.username}`} state={{uid: user.uid}} style={{color:"black", textDecoration: "none", display:"flex"}}>
+            <Link to={cuser.uid !== user.uid ? `/users/${user.username}` : `/${user.username}`} state={{uid: user.uid}} style={{color:"black", textDecoration: "none", display:"flex"}}>
                 <Container style={{ display: "flex", alignItems: "center", gap: "3px" }}>
                     <Image src={profilePicUrl} roundedCircle style={{height: "40px", width: "40px"}}/>
                     {user.username}

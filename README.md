@@ -22,6 +22,7 @@ Features to be added or unfinished:
   - badges system 
   - private users 
   - routines 
+  - edit profile
 
 Current issues: 
   - linking from other user to other user not working. 
